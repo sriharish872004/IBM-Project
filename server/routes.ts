@@ -181,25 +181,58 @@ export async function registerRoutes(
   });
 
   // Seed Data
-  if ((await storage.getSchemes()).length === 0) {
-    await storage.createScheme({
-        title: "PM Kisan Samman Nidhi",
-        description: "Income support of Rs 6000 per year for farmers.",
-        agency: "Ministry of Agriculture",
-        category: "Agriculture",
-        criteria: { type: "json", required: ["farmer", "land_ownership", "income < 2L"] },
-        benefits: "Rs 6000 per year",
-        applicationUrl: "https://pmkisan.gov.in"
-    });
-    await storage.createScheme({
-        title: "Ayushman Bharat",
-        description: "Health insurance coverage up to 5 lakhs per family per year.",
-        agency: "National Health Authority",
-        category: "Health",
-        criteria: { type: "json", required: ["low_income", "no_government_job"] },
-        benefits: "Health Insurance up to 5L",
-        applicationUrl: "https://pmjay.gov.in"
-    });
+  if ((await storage.getSchemes()).length <= 2) {
+    const additionalSchemes = [
+      {
+        title: "Pradhan Mantri Awas Yojana",
+        description: "Housing for All mission aiming to provide affordable housing to the urban poor.",
+        agency: "Ministry of Housing and Urban Affairs",
+        category: "Housing",
+        criteria: { type: "json", required: ["urban_poor", "no_pucca_house"] },
+        benefits: "Interest subsidy on housing loans.",
+        applicationUrl: "https://pmay-urban.gov.in"
+      },
+      {
+        title: "National Social Assistance Programme",
+        description: "Financial assistance to the elderly, widows and persons with disabilities.",
+        agency: "Ministry of Rural Development",
+        category: "Social Welfare",
+        criteria: { type: "json", required: ["BPL_family", "aged_60_plus_or_widow_or_disabled"] },
+        benefits: "Monthly pension.",
+        applicationUrl: "https://nsap.nic.in"
+      },
+      {
+        title: "Skill India Mission",
+        description: "Providing training to youth in various industry-relevant skills.",
+        agency: "Ministry of Skill Development",
+        category: "Education",
+        criteria: { type: "json", required: ["youth", "unemployed"] },
+        benefits: "Skill training and certification.",
+        applicationUrl: "https://www.skillindia.gov.in"
+      },
+      {
+        title: "Startup India",
+        description: "Promotion of startups, generation of employment and wealth creation.",
+        agency: "Department for Promotion of Industry and Internal Trade",
+        category: "Business",
+        criteria: { type: "json", required: ["innovative_business", "startup_registration"] },
+        benefits: "Tax exemptions and funding support.",
+        applicationUrl: "https://www.startupindia.gov.in"
+      },
+      {
+        title: "Digital India Internship Scheme",
+        description: "Opportunities for students to work on various projects under Digital India.",
+        agency: "Ministry of Electronics and Information Technology",
+        category: "Employment",
+        criteria: { type: "json", required: ["student", "IT_background"] },
+        benefits: "Stipend and work experience.",
+        applicationUrl: "https://www.meity.gov.in/internship-scheme"
+      }
+    ];
+
+    for (const scheme of additionalSchemes) {
+      await storage.createScheme(scheme);
+    }
   }
 
   return httpServer;
