@@ -181,52 +181,61 @@ export async function registerRoutes(
   });
 
   // Seed Data
-  if ((await storage.getSchemes()).length <= 2) {
+  if ((await storage.getSchemes()).length <= 7) {
     const additionalSchemes = [
       {
-        title: "Pradhan Mantri Awas Yojana",
-        description: "Housing for All mission aiming to provide affordable housing to the urban poor.",
-        agency: "Ministry of Housing and Urban Affairs",
-        category: "Housing",
-        criteria: { type: "json", required: ["urban_poor", "no_pucca_house"] },
-        benefits: "Interest subsidy on housing loans.",
-        applicationUrl: "https://pmay-urban.gov.in"
+        title: "PM-KMY (Kisan Maandhan Yojana)",
+        description: "Old age pension scheme for all Small and Marginal Farmers (SMF) in the country.",
+        agency: "Ministry of Agriculture and Farmers Welfare",
+        category: "Agriculture",
+        criteria: { type: "json", required: ["farmer", "age_18_to_40", "land_less_than_2_hectares"] },
+        benefits: "Fixed pension of Rs. 3,000/- per month on attaining the age of 60 years.",
+        applicationUrl: "https://maandhan.in"
       },
       {
-        title: "National Social Assistance Programme",
-        description: "Financial assistance to the elderly, widows and persons with disabilities.",
+        title: "Mission Indradhanush",
+        description: "Immunization program to ensure full immunization with all available vaccines for children up to two years and pregnant women.",
+        agency: "Ministry of Health and Family Welfare",
+        category: "Health",
+        criteria: { type: "json", required: ["pregnant_women", "children_under_2"] },
+        benefits: "Free vaccination against life-threatening diseases.",
+        applicationUrl: "https://www.nhm.gov.in"
+      },
+      {
+        title: "PMAY-G (Gramin)",
+        description: "Provides a pucca house with basic amenities to all houseless householders and those households living in kutcha and dilapidated house.",
         agency: "Ministry of Rural Development",
-        category: "Social Welfare",
-        criteria: { type: "json", required: ["BPL_family", "aged_60_plus_or_widow_or_disabled"] },
-        benefits: "Monthly pension.",
-        applicationUrl: "https://nsap.nic.in"
+        category: "Housing",
+        criteria: { type: "json", required: ["rural_area", "no_pucca_house", "SECC_2011_data"] },
+        benefits: "Financial assistance for house construction.",
+        applicationUrl: "https://pmayg.nic.in"
       },
       {
-        title: "Skill India Mission",
-        description: "Providing training to youth in various industry-relevant skills.",
-        agency: "Ministry of Skill Development",
-        category: "Education",
-        criteria: { type: "json", required: ["youth", "unemployed"] },
-        benefits: "Skill training and certification.",
-        applicationUrl: "https://www.skillindia.gov.in"
-      },
-      {
-        title: "Startup India",
-        description: "Promotion of startups, generation of employment and wealth creation.",
-        agency: "Department for Promotion of Industry and Internal Trade",
+        title: "Stand Up India",
+        description: "Facilitates bank loans between 10 lakh and 1 crore to at least one SC or ST borrower and at least one woman borrower per bank branch for setting up a greenfield enterprise.",
+        agency: "Department of Financial Services",
         category: "Business",
-        criteria: { type: "json", required: ["innovative_business", "startup_registration"] },
-        benefits: "Tax exemptions and funding support.",
-        applicationUrl: "https://www.startupindia.gov.in"
+        criteria: { type: "json", required: ["SC_ST_or_Woman", "above_18_years", "greenfield_enterprise"] },
+        benefits: "Bank loan for entrepreneurship.",
+        applicationUrl: "https://www.standupmitra.in"
       },
       {
-        title: "Digital India Internship Scheme",
-        description: "Opportunities for students to work on various projects under Digital India.",
-        agency: "Ministry of Electronics and Information Technology",
-        category: "Employment",
-        criteria: { type: "json", required: ["student", "IT_background"] },
-        benefits: "Stipend and work experience.",
-        applicationUrl: "https://www.meity.gov.in/internship-scheme"
+        title: "PM-SVA Nidhi",
+        description: "Special Micro-Credit Facility Scheme for providing affordable loans to street vendors to resume their livelihoods.",
+        agency: "Ministry of Housing and Urban Affairs",
+        category: "Business",
+        criteria: { type: "json", required: ["street_vendor", "urban_area"] },
+        benefits: "Working capital loan up to Rs. 10,000.",
+        applicationUrl: "https://pmsvanidhi.mohua.gov.in"
+      },
+      {
+        title: "Kushal Yuva Program",
+        description: "Skill development program for youth to enhance their employability through soft skills and IT literacy.",
+        agency: "Bihar Skill Development Mission",
+        category: "Education",
+        criteria: { type: "json", required: ["age_15_to_28", "passed_10th_or_12th"] },
+        benefits: "Training in Communication, IT Literacy and Soft Skills.",
+        applicationUrl: "https://skillmissionbihar.org"
       }
     ];
 
